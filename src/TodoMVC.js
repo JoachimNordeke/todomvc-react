@@ -1,57 +1,88 @@
-import React, { Component } from 'react';
-import TodoEntry from './TodoEntry';
-import TodoList from './TodoList';
-import TodoAction from './TodoAction';
+import React, { Component } from "react";
+import TodoEntry from "./TodoEntry";
+import TodoList from "./TodoList";
+import TodoAction from "./TodoAction";
 
 class TodoMVC extends Component {
   state = {
-    todos: [
-      {
-        id: 1,
-        title: 'Do something cool',
-        isDone: false
-      },
-      {
-        id: 2,
-        title: 'Buy milk',
-        isDone: false
-      },
-      {
-        id: 3,
-        title: 'Take out trash',
-        isDone: false
-      }
-    ]
+    selectAllChecked: false,
+    todos: [],
+    newTodo: {
+      title: null,
+      isDone: false
+    }
   };
 
   render() {
     return (
       <div>
-        <TodoEntry todos={this.state.todos} toggleSelectAll={this.toggleSelectAll} addTodo={this.addTodo} />
-        <TodoList todos={this.state.todos} deleteTodo={this.deleteTodo} isDoneSwitch={this.isDoneSwitch} />
-        <TodoAction todos={this.state.todos} />
+        <TodoEntry
+          todos={this.state.todos}
+          newTodo={this.state.newTodo}
+          toggleSelectAll={this.toggleSelectAll}
+          selectAllChecked={this.state.selectAllChecked}
+          addTodo={this.addTodo}
+        />
+        <TodoList
+          todos={this.state.todos}
+          deleteTodo={this.deleteTodo}
+          isDoneSwitch={this.isDoneSwitch}
+        />
+        <TodoAction todos={this.state.todos} deleteCompleted={this.deleteCompleted} />
       </div>
     );
   }
 
-  addTodo = (title) => {
+  addTodo = e => {
+    e.preventDefault();
+    e.target.todoTitle.value = "";
+
     let newTodoArray = this.state.todos;
-    newTodoArray.push({id: 1, title: title, isDone: false });
-   this.setState({ todos: newTodoArray });
+    newTodoArray.push(this.state.newTodo);
+    this.setState({ newTodo: { title: null, isDone: false } });
+    this.setState({ todos: newTodoArray });
+  };
+  
+  deleteTodo = returnedTodo => {
+    this.setState({
+      todos: [...this.state.todos.filter(todo => todo !== returnedTodo)]
+    });
+  };
+  deleteCompleted = () => {
+    this.setState({
+      todos: [...this.state.todos.filter(todo => todo.isDone !== true)],
+      selectAllChecked: false
+    });
   }
-  deleteTodo = (id) => {
-    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
-  }
-  toggleSelectAll = () => {
-    alert('toggleSelectAll called')
-  }
-  isDoneSwitch = (id) => {
-    this.setState({ todos: this.state.todos.map(todo => {
-      if (todo.id === id){
-        todo.isDone = !todo.isDone
+  toggleSelectAll = e => {
+    this.setState({
+      todos: [...this.state.todos.map(todo => {
+        todo.isDone = e.target.checked ? true : false;
+        return todo;
+      })]
+    });
+    this.isAllSelected();
+  };
+
+  isDoneSwitch = returnedTodo => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        todo.isDone = todo === returnedTodo ? !todo.isDone : todo.isDone;
+        return todo;
+      })
+    });
+    this.isAllSelected();
+  };
+
+  isAllSelected = () => {
+    let allIsSelected = true;
+    this.state.todos.forEach(todo => {
+      if (!todo.isDone)
+      {
+        allIsSelected = false;
       }
-      return todo;
-    }) });
+    });
+    this.setState({selectAllChecked: allIsSelected});
   }
 }
 

@@ -5,7 +5,11 @@ class TodoItem extends Component {
     return (
       <li>
         <label className={this.checkboxStyle()}>
-          <input type="checkbox" className="todo-check" onChange={this.props.isDoneSwitch.bind(this, this.props.todo.id)} />
+          <input
+            type="checkbox"
+            className="todo-check"
+            onChange={this.props.isDoneSwitch.bind(this, this.props.todo)}
+          />
 
           <span className="check">{this.check()}</span>
         </label>
@@ -16,7 +20,7 @@ class TodoItem extends Component {
 
         <input type="text" hidden />
 
-        <button onClick={this.props.deleteTodo.bind(this, this.props.todo.id)}>
+        <button onClick={this.props.deleteTodo.bind(this, this.props.todo)}>
           ×
         </button>
       </li>

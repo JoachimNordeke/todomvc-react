@@ -1,52 +1,44 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class TodoEntry extends Component {
-  constructor(props){
-    super(props);
-    this.state = {todoTitle: ''}
-  }
   render() {
     return (
-          <form onSubmit={this.props.addTodo.bind(this, this.state.todoTitle)}>
-          <div className="todo-entry">
-            <input type="checkbox" id="checkAll" />
-            <label for="checkAll" style={this.allVisible()}>❯</label>
-            <input type="text" placeholder="What needs to be done?" onChange={this.updateStateTitle} />
-          </div>
-        </form>
+      <form onSubmit={this.props.addTodo}>
+        <div className="todo-entry">
+          <input type="checkbox" id="checkAll" onClick={this.props.toggleSelectAll} checked={this.props.selectAllChecked} />
+          <label for="checkAll" style={this.allVisible()}>
+            ❯
+          </label>
+          <input
+            type="text"
+            placeholder="What needs to be done?"
+            onChange={this.updateNewTodo}
+            name="todoTitle"
+          />
+        </div>
+      </form>
     );
   }
 
-updateStateTitle = (e) => {
-  this.setState({
-    todoTitle: e.target.value
-  })
-}
+  updateNewTodo = e => {
+    this.props.newTodo.title = e.target.value;
+  };
 
   allSelected = () => {
     this.props.todos.forEach(todo => {
-      if (!todo.isDone)
-      {
+      if (!todo.isDone) {
         return false;
       }
     });
 
     return true;
-  }
+  };
 
   allVisible = () => {
-    if (this.props.todos.length === 0)
-    {
-      return {
-        visibility: 'hidden'
-      }
-    }
-    else {
-      return {
-        visibility: 'visible'
-      }
-    }
-  }
+    return this.props.todos.length === 0
+      ? { visibility: "hidden" }
+      : { visibility: "visible" };
+  };
 }
 
 export default TodoEntry;

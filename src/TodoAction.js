@@ -21,20 +21,15 @@ class TodoAction extends Component {
                         </li>
                     </ul>
                 </li>
-                <li><button style={this.hidden()}>Clear completed</button></li>
+                <li><button onClick={this.props.deleteCompleted} style={this.hidden()}>Clear completed</button></li>
             </ul>
             </div>
         );
     }
 
+
 hideSection = () => {
-    if (this.props.todos.length === 0)
-    {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return this.props.todos.length === 0 ? true : false;
 }
 
 hidden = () => {
