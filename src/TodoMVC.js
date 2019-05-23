@@ -28,7 +28,10 @@ class TodoMVC extends Component {
           deleteTodo={this.deleteTodo}
           isDoneSwitch={this.isDoneSwitch}
         />
-        <TodoAction todos={this.state.todos} deleteCompleted={this.deleteCompleted} />
+        <TodoAction
+          todos={this.state.todos}
+          deleteCompleted={this.deleteCompleted}
+        />
       </div>
     );
   }
@@ -42,7 +45,7 @@ class TodoMVC extends Component {
     this.setState({ newTodo: { title: null, isDone: false } });
     this.setState({ todos: newTodoArray });
   };
-  
+
   deleteTodo = returnedTodo => {
     this.setState({
       todos: [...this.state.todos.filter(todo => todo !== returnedTodo)]
@@ -53,13 +56,15 @@ class TodoMVC extends Component {
       todos: [...this.state.todos.filter(todo => todo.isDone !== true)],
       selectAllChecked: false
     });
-  }
+  };
   toggleSelectAll = e => {
     this.setState({
-      todos: [...this.state.todos.map(todo => {
-        todo.isDone = e.target.checked ? true : false;
-        return todo;
-      })]
+      todos: [
+        ...this.state.todos.map(todo => {
+          todo.isDone = e.target.checked ? true : false;
+          return todo;
+        })
+      ]
     });
     this.isAllSelected();
   };
@@ -77,13 +82,12 @@ class TodoMVC extends Component {
   isAllSelected = () => {
     let allIsSelected = true;
     this.state.todos.forEach(todo => {
-      if (!todo.isDone)
-      {
+      if (!todo.isDone) {
         allIsSelected = false;
       }
     });
-    this.setState({selectAllChecked: allIsSelected});
-  }
+    this.setState({ selectAllChecked: allIsSelected });
+  };
 }
 
 export default TodoMVC;

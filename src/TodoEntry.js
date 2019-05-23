@@ -5,7 +5,12 @@ class TodoEntry extends Component {
     return (
       <form onSubmit={this.props.addTodo}>
         <div className="todo-entry">
-          <input type="checkbox" id="checkAll" onClick={this.props.toggleSelectAll} checked={this.props.selectAllChecked} />
+          <input
+            type="checkbox"
+            id="checkAll"
+            onClick={this.props.toggleSelectAll}
+            checked={this.props.selectAllChecked}
+          />
           <label for="checkAll" style={this.allVisible()}>
             ❯
           </label>
