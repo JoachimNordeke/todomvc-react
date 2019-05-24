@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import TodoEntry from "./TodoEntry";
-import TodoList from "./TodoList";
-import TodoAction from "./TodoAction";
+import TodoEntry from "./components/TodoEntry";
+import TodoList from "./components/TodoList";
+import TodoAction from "./components/TodoAction";
 
 class TodoMVC extends Component {
   state = {
@@ -100,13 +100,6 @@ class TodoMVC extends Component {
       return todo;
     });
     this.setState(newState);
-
-    // this.setState({
-    //   todos: this.state.todos.map(todo => {
-    //     todo.isDone = todo === returnedTodo ? !todo.isDone : todo.isDone;
-    //     return todo;
-    //   })
-    // });
 
     this.isAllSelected();
 
