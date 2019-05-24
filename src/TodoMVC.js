@@ -13,6 +13,14 @@ class TodoMVC extends Component {
     }
   };
 
+  componentDidMount(){
+    const localState = JSON.parse(localStorage.getItem('todos'));
+    if (localState !== null)
+    {
+      this.setState(localState);
+    }
+  }
+
   render() {
     return (
       <div>
@@ -36,57 +44,88 @@ class TodoMVC extends Component {
     );
   }
 
+  saveLocal = () => {
+    localStorage.setItem('todos', JSON.stringify(this.state));
+  }
+
   addTodo = e => {
     e.preventDefault();
     e.target.todoTitle.value = "";
 
-    let newTodoArray = this.state.todos;
-    newTodoArray.push(this.state.newTodo);
-    this.setState({ newTodo: { title: null, isDone: false } });
-    this.setState({ todos: newTodoArray });
+    const newState = this.state;
+    newState.todos.push(newState.newTodo);
+    newState.newTodo = { title: null, isDone: false };
+    this.setState(newState);
+
+    this.isAllSelected();
+
+    this.saveLocal();
   };
 
   deleteTodo = returnedTodo => {
-    this.setState({
-      todos: [...this.state.todos.filter(todo => todo !== returnedTodo)]
-    });
+    const newState = this.state;
+    newState.todos = newState.todos.filter(todo => todo !== returnedTodo);
+    this.setState(newState);
+    
+    this.isAllSelected();
+
+    this.saveLocal();
   };
   deleteCompleted = () => {
-    this.setState({
-      todos: [...this.state.todos.filter(todo => todo.isDone !== true)],
-      selectAllChecked: false
-    });
+    const newState = this.state;
+    newState.todos = newState.todos.filter(todo => todo.isDone !== true);
+    newState.selectAllChecked = false;
+    this.setState(newState);
+
+    this.isAllSelected();
+
+    this.saveLocal();
   };
   toggleSelectAll = e => {
-    this.setState({
-      todos: [
-        ...this.state.todos.map(todo => {
-          todo.isDone = e.target.checked ? true : false;
-          return todo;
-        })
-      ]
+    const newState = this.state;
+    newState.todos = newState.todos.map(todo => {
+      todo.isDone = e.target.checked ? true : false;
+      return todo;
     });
+    this.setState(newState);
+
     this.isAllSelected();
+
+    this.saveLocal();
   };
 
   isDoneSwitch = returnedTodo => {
-    this.setState({
-      todos: this.state.todos.map(todo => {
-        todo.isDone = todo === returnedTodo ? !todo.isDone : todo.isDone;
-        return todo;
-      })
+    const newState = this.state;
+    newState.todos = newState.todos.map(todo => {
+      todo.isDone = todo === returnedTodo ? !todo.isDone : todo.isDone;
+      return todo;
     });
+    this.setState(newState);
+
+    // this.setState({
+    //   todos: this.state.todos.map(todo => {
+    //     todo.isDone = todo === returnedTodo ? !todo.isDone : todo.isDone;
+    //     return todo;
+    //   })
+    // });
+
     this.isAllSelected();
+
+    this.saveLocal();
   };
 
   isAllSelected = () => {
+    const newState = this.state;
     let allIsSelected = true;
-    this.state.todos.forEach(todo => {
+    newState.todos.forEach(todo => {
       if (!todo.isDone) {
         allIsSelected = false;
       }
     });
-    this.setState({ selectAllChecked: allIsSelected });
+    newState.selectAllChecked = allIsSelected;
+    this.setState(newState);
+
+    this.saveLocal();
   };
 }
 
