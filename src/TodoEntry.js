@@ -11,7 +11,7 @@ class TodoEntry extends Component {
             onChange={this.props.toggleSelectAll}
             checked={this.props.selectAllChecked}
           />
-          <label for="checkAll" style={this.allVisible()}>
+          <label htmlFor="checkAll" style={this.allVisible()}>
             ❯
           </label>
           <input
