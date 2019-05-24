@@ -13,10 +13,9 @@ class TodoMVC extends Component {
     }
   };
 
-  componentDidMount(){
-    const localState = JSON.parse(localStorage.getItem('todos'));
-    if (localState !== null)
-    {
+  componentDidMount() {
+    const localState = JSON.parse(localStorage.getItem("todos"));
+    if (localState !== null) {
       this.setState(localState);
     }
   }
@@ -45,8 +44,8 @@ class TodoMVC extends Component {
   }
 
   saveLocal = () => {
-    localStorage.setItem('todos', JSON.stringify(this.state));
-  }
+    localStorage.setItem("todos", JSON.stringify(this.state));
+  };
 
   addTodo = e => {
     e.preventDefault();
@@ -66,7 +65,7 @@ class TodoMVC extends Component {
     const newState = this.state;
     newState.todos = newState.todos.filter(todo => todo !== returnedTodo);
     this.setState(newState);
-    
+
     this.isAllSelected();
 
     this.saveLocal();
