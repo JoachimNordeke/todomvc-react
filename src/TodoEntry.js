@@ -8,7 +8,7 @@ class TodoEntry extends Component {
           <input
             type="checkbox"
             id="checkAll"
-            onClick={this.props.toggleSelectAll}
+            onChange={this.props.toggleSelectAll}
             checked={this.props.selectAllChecked}
           />
           <label for="checkAll" style={this.allVisible()}>
