@@ -6,46 +6,47 @@ class TodoList extends Component {
     return (
       <div className="todo-list">
         <ul>
-          {this.props.todos.map(todo => {
-            if (this.props.viewMode === "active") {
-              if (!todo.isDone) {
-                return (
-                  <TodoItem
-                    key={this.getId(todo)}
-                    todo={todo}
-                    deleteTodo={this.props.deleteTodo}
-                    isDoneSwitch={this.props.isDoneSwitch}
-                  />
-                );
-              }
-            }
-            else if (this.props.viewMode === "completed") {
-              if (todo.isDone) {
-                return (
-                  <TodoItem
-                    key={this.getId(todo)}
-                    todo={todo}
-                    deleteTodo={this.props.deleteTodo}
-                    isDoneSwitch={this.props.isDoneSwitch}
-                  />
-                );
-              }
-            }
-            else {
-              return (
-                <TodoItem
-                  key={this.getId(todo)}
-                  todo={todo}
-                  deleteTodo={this.props.deleteTodo}
-                  isDoneSwitch={this.props.isDoneSwitch}
-                />
-              );
-            }
-
-          })}
+          {this.props.todos.map(this.toggleView)}
         </ul>
       </div>
     );
+  }
+
+  toggleView = todo => {
+    if (this.props.viewMode === "active") {
+      if (!todo.isDone) {
+        return (
+          <TodoItem
+            key={this.getId(todo)}
+            todo={todo}
+            deleteTodo={this.props.deleteTodo}
+            isDoneSwitch={this.props.isDoneSwitch}
+          />
+        );
+      }
+    }
+    else if (this.props.viewMode === "completed") {
+      if (todo.isDone) {
+        return (
+          <TodoItem
+            key={this.getId(todo)}
+            todo={todo}
+            deleteTodo={this.props.deleteTodo}
+            isDoneSwitch={this.props.isDoneSwitch}
+          />
+        );
+      }
+    }
+    else {
+      return (
+        <TodoItem
+          key={this.getId(todo)}
+          todo={todo}
+          deleteTodo={this.props.deleteTodo}
+          isDoneSwitch={this.props.isDoneSwitch}
+        />
+      );
+    }
   }
 
   getId = t => {

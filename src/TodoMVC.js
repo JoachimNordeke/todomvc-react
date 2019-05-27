@@ -14,7 +14,7 @@ class TodoMVC extends Component {
     viewMode: "all"
   };
 
-  
+
   componentDidMount() {
     const localState = JSON.parse(localStorage.getItem("todos"));
     if (localState !== null) {
@@ -49,16 +49,15 @@ class TodoMVC extends Component {
       </div>
     );
   }
-  
+
   allViewMode = () => {
-    this.setState({viewMode: "all"})
+    this.setState({ viewMode: "all" })
   }
   completedViewMode = () => {
-    this.setState({viewMode: "completed"})
+    this.setState({ viewMode: "completed" })
   }
-  activeViewMode = () =>
-  {
-    this.setState({viewMode: "active"})
+  activeViewMode = () => {
+    this.setState({ viewMode: "active" })
   }
 
   saveLocal = () => {
