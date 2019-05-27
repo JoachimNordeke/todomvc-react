@@ -10,9 +10,11 @@ class TodoMVC extends Component {
     newTodo: {
       title: null,
       isDone: false
-    }
+    },
+    viewMode: "all"
   };
 
+  
   componentDidMount() {
     const localState = JSON.parse(localStorage.getItem("todos"));
     if (localState !== null) {
@@ -34,13 +36,29 @@ class TodoMVC extends Component {
           todos={this.state.todos}
           deleteTodo={this.deleteTodo}
           isDoneSwitch={this.isDoneSwitch}
+          viewMode={this.state.viewMode}
         />
         <TodoAction
           todos={this.state.todos}
           deleteCompleted={this.deleteCompleted}
+          showAll={this.showAll}
+          activeViewMode={this.activeViewMode}
+          completedViewMode={this.completedViewMode}
+          allViewMode={this.allViewMode}
         />
       </div>
     );
+  }
+  
+  allViewMode = () => {
+    this.setState({viewMode: "all"})
+  }
+  completedViewMode = () => {
+    this.setState({viewMode: "completed"})
+  }
+  activeViewMode = () =>
+  {
+    this.setState({viewMode: "active"})
   }
 
   saveLocal = () => {
@@ -119,6 +137,10 @@ class TodoMVC extends Component {
 
     this.saveLocal();
   };
+
+  showAll = () => {
+
+  }
 }
 
 export default TodoMVC;

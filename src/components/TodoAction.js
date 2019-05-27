@@ -13,17 +13,17 @@ class TodoAction extends Component {
           <li>
             <ul>
               <li>
-                <a id="all" href="#/all">
+                <a id="all" href="#/all" onClick={this.props.allViewMode}>
                   All
                 </a>
               </li>
               <li>
-                <a id="active" href="#/active">
+                <a id="active" href="#/active" onClick={this.props.activeViewMode}>
                   Active
                 </a>
               </li>
               <li>
-                <a id="completed" href="#/completed">
+                <a id="completed" href="#/completed" onClick={this.props.completedViewMode}>
                   Completed
                 </a>
               </li>

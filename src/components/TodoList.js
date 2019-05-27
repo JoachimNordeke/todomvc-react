@@ -7,14 +7,41 @@ class TodoList extends Component {
       <div className="todo-list">
         <ul>
           {this.props.todos.map(todo => {
-            return (
-              <TodoItem
-                key={this.getId(todo)}
-                todo={todo}
-                deleteTodo={this.props.deleteTodo}
-                isDoneSwitch={this.props.isDoneSwitch}
-              />
-            );
+            if (this.props.viewMode === "active") {
+              if (!todo.isDone) {
+                return (
+                  <TodoItem
+                    key={this.getId(todo)}
+                    todo={todo}
+                    deleteTodo={this.props.deleteTodo}
+                    isDoneSwitch={this.props.isDoneSwitch}
+                  />
+                );
+              }
+            }
+            else if (this.props.viewMode === "completed") {
+              if (todo.isDone) {
+                return (
+                  <TodoItem
+                    key={this.getId(todo)}
+                    todo={todo}
+                    deleteTodo={this.props.deleteTodo}
+                    isDoneSwitch={this.props.isDoneSwitch}
+                  />
+                );
+              }
+            }
+            else {
+              return (
+                <TodoItem
+                  key={this.getId(todo)}
+                  todo={todo}
+                  deleteTodo={this.props.deleteTodo}
+                  isDoneSwitch={this.props.isDoneSwitch}
+                />
+              );
+            }
+
           })}
         </ul>
       </div>
