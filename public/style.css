@@ -96,6 +96,7 @@ main {
     color: #545454;
     word-break: break-all;
     border: solid thin transparent;
+    display: block;
 }
 #todo-text-checked {
     flex: 9;
@@ -109,6 +110,7 @@ main {
 }
 .todo-list button {
     visibility: hidden;
+    display: block;
     flex: 1;
     background: none;
     border: none;

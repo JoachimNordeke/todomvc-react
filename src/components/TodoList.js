@@ -21,6 +21,7 @@ class TodoList extends Component {
             todo={todo}
             deleteTodo={this.props.deleteTodo}
             isDoneSwitch={this.props.isDoneSwitch}
+            updateTodo={this.props.updateTodo}
           />
         );
       }
@@ -33,6 +34,7 @@ class TodoList extends Component {
             todo={todo}
             deleteTodo={this.props.deleteTodo}
             isDoneSwitch={this.props.isDoneSwitch}
+            updateTodo={this.props.updateTodo}
           />
         );
       }
@@ -44,6 +46,7 @@ class TodoList extends Component {
           todo={todo}
           deleteTodo={this.props.deleteTodo}
           isDoneSwitch={this.props.isDoneSwitch}
+          updateTodo={this.props.updateTodo}
         />
       );
     }

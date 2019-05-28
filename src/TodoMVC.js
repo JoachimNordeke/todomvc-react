@@ -36,6 +36,7 @@ class TodoMVC extends Component {
           todos={this.state.todos}
           deleteTodo={this.deleteTodo}
           isDoneSwitch={this.isDoneSwitch}
+          updateTodo={this.updateTodo}
           viewMode={this.state.viewMode}
         />
         <TodoAction
@@ -87,6 +88,15 @@ class TodoMVC extends Component {
     this.setState(newState);
 
     this.isAllSelected();
+
+    this.saveLocal();
+  };
+
+  updateTodo = (returnedTodo, newTitle) => {
+    const newState = this.state;
+    newState.todos.find(todo => todo === returnedTodo).title = newTitle;
+    // newState.todos.map(todo => todo === returnedTodo).title = newTitle;
+    this.setState(newState);
 
     this.saveLocal();
   };
