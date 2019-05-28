@@ -13,17 +13,17 @@ class TodoAction extends Component {
           <li>
             <ul>
               <li>
-                <a id="all" href="#/all" onClick={this.props.allViewMode}>
+                <a id="all" className={this.setStyleAll()} href="#/all" onClick={this.props.allViewMode}>
                   All
                 </a>
               </li>
               <li>
-                <a id="active" href="#/active" onClick={this.props.activeViewMode}>
+                <a id="active" className={this.setStyleActive()} href="#/active" onClick={this.props.activeViewMode}>
                   Active
                 </a>
               </li>
               <li>
-                <a id="completed" href="#/completed" onClick={this.props.completedViewMode}>
+                <a id="completed" className={this.setStyleCompleted()} href="#/completed" onClick={this.props.completedViewMode}>
                   Completed
                 </a>
               </li>
@@ -37,6 +37,25 @@ class TodoAction extends Component {
         </ul>
       </div>
     );
+  }
+
+  setStyleAll = () => {
+    if (this.props.viewMode === "all") {
+      return "selected-link"
+    }
+  }
+
+
+  setStyleActive = () => {
+    if (this.props.viewMode === "active") {
+      return "selected-link"
+    }
+  }
+
+  setStyleCompleted = () => {
+    if (this.props.viewMode === "completed") {
+      return "selected-link"
+    }
   }
 
   hideSection = () => {

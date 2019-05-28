@@ -45,19 +45,32 @@ class TodoMVC extends Component {
           activeViewMode={this.activeViewMode}
           completedViewMode={this.completedViewMode}
           allViewMode={this.allViewMode}
+          viewMode={this.state.viewMode}
         />
       </div>
     );
   }
 
   allViewMode = () => {
-    this.setState({ viewMode: "all" })
+    let newState = this.state;
+    newState.viewMode = "all";
+    this.setState(newState);
+
+    this.saveLocal();
   }
   completedViewMode = () => {
-    this.setState({ viewMode: "completed" })
+    let newState = this.state;
+    newState.viewMode = "completed";
+    this.setState(newState);
+
+    this.saveLocal();
   }
   activeViewMode = () => {
-    this.setState({ viewMode: "active" })
+    let newState = this.state;
+    newState.viewMode = "active";
+    this.setState(newState);
+
+    this.saveLocal();
   }
 
   saveLocal = () => {

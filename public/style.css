@@ -195,7 +195,6 @@ main {
     border: solid thin rgba(175, 47, 47, 0.1);
 }
 
-/* used to switch style of the links by JS */
 
 a.selected-link {
     border: solid thin rgba(175, 47, 47, 0.2);
