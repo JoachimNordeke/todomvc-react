@@ -293,4 +293,25 @@ footer a:hover {
         font-size: 1.8em;
         color: #cc9a9a;
     }
+
+    .todo-action button {
+        visibility: hidden;
+        cursor: pointer;
+        background-color: pink;
+        border-radius: 30px;
+        padding: 1em;
+    }
+
+    .todo-action a {
+        cursor: pointer;
+        font-size: 1em;
+        padding: 0.2em 0.6em;
+        border-radius: 3px;
+        color: #878787;
+        text-decoration: none;
+        border: 1px solid transparent; /* without this the border will keep resizing and moving the buttons */
+        background-color: skyblue;
+        border-radius: 15px;
+        padding: 0.5em;      
+    }
 }
