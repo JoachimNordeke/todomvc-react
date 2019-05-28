@@ -19,6 +19,7 @@ class TodoMVC extends Component {
     const localState = JSON.parse(localStorage.getItem("todos"));
     if (localState !== null) {
       this.setState(localState);
+      window.onhashchange = this.displayByHash;
     }
   }
 
@@ -56,7 +57,6 @@ class TodoMVC extends Component {
     let newState = this.state;
     newState.viewMode = "all";
     this.setState(newState);
-
     this.saveLocal();
   }
   completedViewMode = () => {
@@ -160,8 +160,26 @@ class TodoMVC extends Component {
     this.saveLocal();
   };
 
-  showAll = () => {
+  displayByHash = () => {
 
+    if (window.location.hash === "#/all") {
+      let newState = this.state;
+      newState.viewMode = "all";
+      this.setState(newState);
+      this.saveLocal();
+    }
+    else if (window.location.hash === "#/active") {
+      let newState = this.state;
+      newState.viewMode = "active";
+      this.setState(newState);
+      this.saveLocal();
+    }
+    else if (window.location.hash === "#/completed" || window.location.hash === "") {
+      let newState = this.state;
+      newState.viewMode = "completed";
+      this.setState(newState);
+      this.saveLocal();
+    }
   }
 }
 

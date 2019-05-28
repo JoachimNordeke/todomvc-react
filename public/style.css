@@ -112,6 +112,7 @@ main {
     visibility: hidden;
     display: block;
     flex: 1;
+    display: block;
     background: none;
     border: none;
     font-size: 1.8em;
@@ -233,4 +234,63 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+}
+
+
+@media screen and (max-width: 550px) {
+    main {
+        font-size: 14px;
+        padding: 1em;
+        width: 90vw;
+        margin: 0 auto;
+    }
+    .todo-action ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .todo-action ul ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+    }
+    .todo-action ul li {
+        padding: 1em;
+        text-align: center;
+        font-size: 1.1em;
+        
+    }
+    .todo-entry input[type="text"] {
+        color: #4d4d4d;
+        padding: .7em .7em;
+        border: none;
+        flex: 10;
+        background-color: "#fefefe";
+        width: 6em;
+    }
+    .todo-entry input[type="text"]::placeholder {
+        color: #e6e6e6;
+        font-style: italic;
+        font-size: 0.7em;
+    }
+    .todo-list {
+        border-bottom: 1px solid #e6e6e6;
+        border-right: 1px solid #e6e6e6;
+        border-left: 1px solid #e6e6e6;
+        padding-right: .2em;
+    }
+
+    .todo-list button {
+        visibility: visible;
+        flex: 1;
+        background: none;
+        border: none;
+        font-size: 1.8em;
+        color: #cc9a9a;
+    }
 }
