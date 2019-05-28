@@ -17,27 +17,12 @@ class TodoEntry extends Component {
           <input
             type="text"
             placeholder="What needs to be done?"
-            onChange={this.updateNewTodo}
             name="todoTitle"
           />
         </div>
       </form>
     );
   }
-
-  updateNewTodo = e => {
-    this.props.newTodo.title = e.target.value;
-  };
-
-  allSelected = () => {
-    this.props.todos.forEach(todo => {
-      if (!todo.isDone) {
-        return false;
-      }
-    });
-
-    return true;
-  };
 
   allVisible = () => {
     return this.props.todos.length === 0

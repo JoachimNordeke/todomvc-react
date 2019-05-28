@@ -17,7 +17,7 @@ class TodoList extends Component {
       if (!todo.isDone) {
         return (
           <TodoItem
-            key={this.getId(todo)}
+            key={todo.id}
             todo={todo}
             deleteTodo={this.props.deleteTodo}
             isDoneSwitch={this.props.isDoneSwitch}
@@ -30,7 +30,7 @@ class TodoList extends Component {
       if (todo.isDone) {
         return (
           <TodoItem
-            key={this.getId(todo)}
+            key={todo.id}
             todo={todo}
             deleteTodo={this.props.deleteTodo}
             isDoneSwitch={this.props.isDoneSwitch}
@@ -42,7 +42,7 @@ class TodoList extends Component {
     else {
       return (
         <TodoItem
-          key={this.getId(todo)}
+          key={todo.id}
           todo={todo}
           deleteTodo={this.props.deleteTodo}
           isDoneSwitch={this.props.isDoneSwitch}
@@ -51,14 +51,6 @@ class TodoList extends Component {
       );
     }
   }
-
-  getId = t => {
-    for (let i = 0; i < this.props.todos.length; i++) {
-      if (t === this.props.todos[i]) {
-        return i;
-      }
-    }
-  };
 }
 
 export default TodoList;
