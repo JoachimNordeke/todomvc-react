@@ -162,8 +162,26 @@ class TodoMVC extends Component {
     this.saveLocal();
   };
 
-  showAll = () => {
+  displayByHash = () => {
 
+    if (window.location.hash === "#/all" || window.location.hash === "") {
+      let newState = this.state;
+      newState.viewMode = "all";
+      this.setState(newState);
+      this.saveLocal();
+    }
+    else if (window.location.hash === "#/active") {
+      let newState = this.state;
+      newState.viewMode = "active";
+      this.setState(newState);
+      this.saveLocal();
+    }
+    else if (window.location.hash === "#/completed" ) {
+      let newState = this.state;
+      newState.viewMode = "completed";
+      this.setState(newState);
+      this.saveLocal();
+    }
   }
 }
 
