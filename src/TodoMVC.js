@@ -19,7 +19,6 @@ class TodoMVC extends Component {
     const localState = JSON.parse(localStorage.getItem("todos"));
     if (localState !== null) {
       this.setState(localState);
-      window.onhashchange = this.displayByHash;
     }
   }
 
@@ -57,6 +56,7 @@ class TodoMVC extends Component {
     let newState = this.state;
     newState.viewMode = "all";
     this.setState(newState);
+
     this.saveLocal();
   }
   completedViewMode = () => {
@@ -82,20 +82,22 @@ class TodoMVC extends Component {
     e.preventDefault();
     e.target.todoTitle.value = "";
 
-    const newState = this.state;
-    newState.todos.push(newState.newTodo);
-    newState.newTodo = { title: null, isDone: false };
-    this.setState(newState);
-
-    this.isAllSelected();
-
-    this.saveLocal();
+    if (this.state.newTodo.title !== null && this.state.newTodo.title.trim() !== ""){
+        const newState = this.state;
+        newState.newTodo.title = newState.newTodo.title.trim();
+        newState.todos.push(newState.newTodo);
+        newState.newTodo = { title: null, isDone: false };
+        this.setState(newState);
+    
+        this.isAllSelected();
+    
+        this.saveLocal();
+    }
   };
 
   updateTodo = (returnedTodo, newTitle) => {
     const newState = this.state;
     newState.todos.find(todo => todo === returnedTodo).title = newTitle;
-    // newState.todos.map(todo => todo === returnedTodo).title = newTitle;
     this.setState(newState);
 
     this.saveLocal();
@@ -160,26 +162,8 @@ class TodoMVC extends Component {
     this.saveLocal();
   };
 
-  displayByHash = () => {
+  showAll = () => {
 
-    if (window.location.hash === "#/all") {
-      let newState = this.state;
-      newState.viewMode = "all";
-      this.setState(newState);
-      this.saveLocal();
-    }
-    else if (window.location.hash === "#/active") {
-      let newState = this.state;
-      newState.viewMode = "active";
-      this.setState(newState);
-      this.saveLocal();
-    }
-    else if (window.location.hash === "#/completed" || window.location.hash === "") {
-      let newState = this.state;
-      newState.viewMode = "completed";
-      this.setState(newState);
-      this.saveLocal();
-    }
   }
 }
 
