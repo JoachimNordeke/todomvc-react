@@ -20,6 +20,8 @@ class TodoMVC extends Component {
     if (localState !== null) {
       this.setState(localState);
     }
+
+    window.onhashchange = this.displayByHash;
   }
 
   render() {
