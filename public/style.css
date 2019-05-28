@@ -4,40 +4,49 @@
     box-sizing: border-box;
     /* outline: 1px solid red; */
 }
+
 body {
     background-color: #f8f8f8;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
 body, footer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 ul {
     list-style-type: none;
 }
+
 header {
     margin: 0.8em;
 }
+
 h1 {
     font-size: 6.5em;
     color: rgba(170, 0, 0, 0.1);
     font-weight: 200;
 }
+
 main {
     width: 550px;
     box-shadow: .5em .5em 2em rgba(200, 200, 200, 0.5);
     border: 1px solid #e6e6e6;
     background-color: white;
 }
+
 .todo-entry {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #e6e6e6;
 }
+
 .todo-entry input[type="checkbox"] {
     display: none;
 }
+
 .todo-entry label {
     display: inline-block;
     font-size: 1.4em;
@@ -46,9 +55,11 @@ main {
     flex: 1;
     text-align: center;
 }
+
 .todo-entry input[type="checkbox"]:checked+label {
     color: #737373;
 }
+
 .todo-entry input[type="text"] {
     font-size: 1.5em;
     color: #4d4d4d;
@@ -57,19 +68,23 @@ main {
     flex: 10;
     background-color: "#fefefe";
 }
+
 .todo-entry input[type="text"]:focus-within {
     outline: none;
 }
+
 .todo-entry input[type="text"]::placeholder {
     color: #e6e6e6;
     font-style: italic;
 }
+
 .todo-list li {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #e6e6e6;
     padding-right: .2em;
 }
+
 .todo-list input[type="text"] {
     flex: 9;
     background-color: transparent;
@@ -79,6 +94,7 @@ main {
     outline: none;
     border: solid thin transparent;
 }
+
 .todo-list input[type="text"]:focus {
     flex: 9;
     color: #545454;
@@ -89,6 +105,7 @@ main {
     outline: none;
     box-shadow: inset 0.3px 0.3px 0.3px 0.3px rgb(180, 173, 173);
 }
+
 #todo-text {
     flex: 9;
     background-color: transparent;
@@ -99,6 +116,7 @@ main {
     border: solid thin transparent;
     display: block;
 }
+
 #todo-text-checked {
     flex: 9;
     background-color: transparent;
@@ -109,6 +127,7 @@ main {
     border: solid thin transparent;
     word-break: break-all;
 }
+
 .todo-list button {
     visibility: hidden;
     display: block;
@@ -131,6 +150,7 @@ main {
 .todo-list button:hover {
     color: #af5b5e;
 }
+
 .todo-check {
     display: none;
 }
@@ -171,13 +191,16 @@ main {
     font-size: .9em;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6, 0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, 0.2);
 }
+
 .todo-action ul {
     display: flex;
     justify-content: space-between;
 }
+
 #left {
     width: 5em;
 }
+
 .todo-action ul ul li {
     margin-left: .6em;
 }
@@ -197,7 +220,6 @@ main {
     border: solid thin rgba(175, 47, 47, 0.1);
 }
 
-
 a.selected-link {
     border: solid thin rgba(175, 47, 47, 0.2);
 }
@@ -215,6 +237,7 @@ a.selected-link:hover {
     cursor: pointer;
     font-size: inherit;
 }
+
 .todo-action button:hover {
     text-decoration: underline;
 }
@@ -235,7 +258,6 @@ footer a:hover {
     text-decoration: underline;
 }
 
-
 @media screen and (max-width: 550px) {
     main {
         font-size: 14px;
@@ -250,19 +272,21 @@ footer a:hover {
         justify-content: space-between;
         align-items: center;
     }
-
     .todo-action ul ul {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        flex-direction: row;
+        justify-content: center;
         align-content: center;
         align-items: center;
+        order: 3;
+    }
+    #left {
+        order: 1;
     }
     .todo-action ul li {
-        padding: 1em;
+        padding: 0.5em;
         text-align: center;
         font-size: 1.1em;
-        
     }
     .todo-entry input[type="text"] {
         color: #4d4d4d;
@@ -275,7 +299,7 @@ footer a:hover {
     .todo-entry input[type="text"]::placeholder {
         color: #e6e6e6;
         font-style: italic;
-        font-size: 0.7em;
+        font-size: 1em;
     }
     .todo-list {
         border-bottom: 1px solid #e6e6e6;
@@ -283,7 +307,6 @@ footer a:hover {
         border-left: 1px solid #e6e6e6;
         padding-right: .2em;
     }
-
     .todo-list button {
         visibility: visible;
         flex: 1;
@@ -292,25 +315,40 @@ footer a:hover {
         font-size: 1.8em;
         color: #cc9a9a;
     }
-
     .todo-action button {
         visibility: hidden;
         cursor: pointer;
         background-color: pink;
         border-radius: 30px;
         padding: 1em;
+        order: 2;
     }
-
     .todo-action a {
         cursor: pointer;
         font-size: 1em;
-        padding: 0.2em 0.6em;
-        border-radius: 3px;
+        padding: 0.2em 0.2em;
+        border-radius: 15px;
         color: #878787;
         text-decoration: none;
-        border: 1px solid transparent; /* without this the border will keep resizing and moving the buttons */
-        background-color: skyblue;
-        border-radius: 15px;
-        padding: 0.5em;      
+        border: 1px solid transparent;
+        /* without this the border will keep resizing and moving the buttons */
+        padding: 0.5em;
+    }
+    @media screen and (max-width: 378px) {
+        .todo-action ul {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
+        }
+        .todo-action ul ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-content: center; 
+            order: 3;
+        }
     }
 }
