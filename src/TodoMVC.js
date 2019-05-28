@@ -10,7 +10,6 @@ class TodoMVC extends Component {
     viewMode: "all"
   };
 
-
   componentDidMount() {
     const localState = JSON.parse(localStorage.getItem("todos"));
     if (localState !== null) {
@@ -51,17 +50,14 @@ class TodoMVC extends Component {
   }
 
   allViewMode = () => {
-    this.setState({viewMode: "all"});
-    this.saveLocal();
-  }
+    this.setState({ viewMode: "all" }, () => this.saveLocal());
+  };
   activeViewMode = () => {
-    this.setState({viewMode: "active"});
-    this.saveLocal();
-  }
+    this.setState({ viewMode: "active" }, () => this.saveLocal());
+  };
   completedViewMode = () => {
-    this.setState({viewMode: "completed"});
-    this.saveLocal();
-  }
+    this.setState({ viewMode: "completed" }, () => this.saveLocal());
+  };
 
   saveLocal = () => {
     localStorage.setItem("todos", JSON.stringify(this.state));
@@ -83,7 +79,7 @@ class TodoMVC extends Component {
         state => {
           const todos = state.todos.push(newTodo);
           return todos;
-        }, 
+        },
         () => {
           this.isAllSelected();
           this.saveLocal();
@@ -96,17 +92,16 @@ class TodoMVC extends Component {
     return this.state.todos.length === 0
       ? 0
       : this.state.todos[this.state.todos.length - 1].id + 1;
-  }
+  };
 
   updateTodo = (returnedTodo, newTitle) => {
-    if (newTitle.trim() !== ""){
+    if (newTitle.trim() !== "") {
       const newArray = this.state.todos;
       newArray.find(todo => todo === returnedTodo).title = newTitle.trim();
-      this.setState({todos: newArray}, () => {
+      this.setState({ todos: newArray }, () => {
         this.saveLocal();
       });
-    }
-    else {
+    } else {
       this.deleteTodo(returnedTodo);
     }
   };
@@ -118,7 +113,7 @@ class TodoMVC extends Component {
       this.saveLocal();
     });
   };
-  
+
   deleteCompleted = () => {
     this.setState(
       state => {
@@ -130,68 +125,50 @@ class TodoMVC extends Component {
       }
     );
   };
-  
+
   toggleSelectAll = e => {
-    const newState = this.state;
-    newState.todos = newState.todos.map(todo => {
+    const newArray = this.state.todos.map(todo => {
       todo.isDone = e.target.checked ? true : false;
       return todo;
     });
-    this.setState(newState);
-
-    this.isAllSelected();
-
-    this.saveLocal();
+    this.setState({ todos: newArray }, () => {
+      this.isAllSelected();
+      this.saveLocal();
+    });
   };
 
   isDoneSwitch = returnedTodo => {
-    const newState = this.state;
-    newState.todos = newState.todos.map(todo => {
+    const newArray = this.state.todos.map(todo => {
       todo.isDone = todo === returnedTodo ? !todo.isDone : todo.isDone;
       return todo;
     });
-    this.setState(newState);
-
-    this.isAllSelected();
-
-    this.saveLocal();
+    this.setState({ todos: newArray }, () => {
+      this.isAllSelected();
+      this.saveLocal();
+    });
   };
 
   isAllSelected = () => {
-    const newState = this.state;
     let allIsSelected = true;
-    newState.todos.forEach(todo => {
+    this.state.todos.forEach(todo => {
       if (!todo.isDone) {
         allIsSelected = false;
       }
     });
-    newState.selectAllChecked = allIsSelected;
-    this.setState(newState);
-
-    this.saveLocal();
+    this.setState({ selectAllChecked: allIsSelected }, () => {
+      this.saveLocal();
+    });
   };
 
   displayByHash = () => {
-
     if (window.location.hash === "#/all" || window.location.hash === "") {
-      let newState = this.state;
-      newState.viewMode = "all";
-      this.setState(newState);
-      this.saveLocal();
+      this.setState({ viewMode: "all" }, () => this.saveLocal());
+    } else if (window.location.hash === "#/active") {
+      this.setState({ viewMode: "active" }, () => this.saveLocal());
+    } else if (window.location.hash === "#/completed") {
+      this.setState({ viewMode: "completed" }, () => this.saveLocal());
     }
-    else if (window.location.hash === "#/active") {
-      let newState = this.state;
-      newState.viewMode = "active";
-      this.setState(newState);
-      this.saveLocal();
-    }
-    else if (window.location.hash === "#/completed" ) {
-      let newState = this.state;
-      newState.viewMode = "completed";
-      this.setState(newState);
-      this.saveLocal();
-    }
-  }
+  };
 }
 
 export default TodoMVC;
