@@ -162,7 +162,7 @@ class TodoMVC extends Component {
 
   displayByHash = () => {
 
-    if (window.location.hash === "#/all") {
+    if (window.location.hash === "#/all" || window.location.hash === "") {
       let newState = this.state;
       newState.viewMode = "all";
       this.setState(newState);
@@ -174,7 +174,7 @@ class TodoMVC extends Component {
       this.setState(newState);
       this.saveLocal();
     }
-    else if (window.location.hash === "#/completed" || window.location.hash === "") {
+    else if (window.location.hash === "#/completed" ) {
       let newState = this.state;
       newState.viewMode = "completed";
       this.setState(newState);
