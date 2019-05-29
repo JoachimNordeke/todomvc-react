@@ -24,7 +24,6 @@ class TodoMVC extends Component {
       <div>
         <TodoEntry
           todos={this.state.todos}
-          newTodo={this.state.newTodo}
           toggleSelectAll={this.toggleSelectAll}
           selectAllChecked={this.state.selectAllChecked}
           addTodo={this.addTodo}
