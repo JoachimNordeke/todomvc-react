@@ -18,6 +18,7 @@ class TodoEntry extends Component {
             type="text"
             placeholder="What needs to be done?"
             name="todoTitle"
+            autoFocus
           />
         </div>
       </form>
