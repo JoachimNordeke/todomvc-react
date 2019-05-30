@@ -55,7 +55,6 @@ class TodoItem extends Component {
     this.textInput.current.hidden = false;
     this.textInput.current.value = e.target.textContent;
     this.textInput.current.focus();
-    this.newTodoTitle = e.target.value;
   };
   saveTodoTitle = e => {
     if (e.key === 'Enter' || e.type === "blur") {

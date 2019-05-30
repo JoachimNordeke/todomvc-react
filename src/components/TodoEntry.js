@@ -3,6 +3,7 @@ import React, { Component } from "react";
 class TodoEntry extends Component {
   render() {
     return (
+      <div>
       <form onSubmit={this.props.addTodo}>
         <div className="todo-entry">
           <input
@@ -22,6 +23,7 @@ class TodoEntry extends Component {
           />
         </div>
       </form>
+      </div>
     );
   }
 

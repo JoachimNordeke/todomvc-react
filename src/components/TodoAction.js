@@ -13,24 +13,18 @@ class TodoAction extends Component {
           <li>
             <ul>
               <li>
-                <a id="all" className={this.setStyleAll()} href="#/all" onClick={this.props.allViewMode}>
-                  All
-                </a>
+                <a id="all" className={this.setStyleAll()} href="#/all">All</a>
               </li>
               <li>
-                <a id="active" className={this.setStyleActive()} href="#/active" onClick={this.props.activeViewMode}>
-                  Active
-                </a>
+                <a id="active" className={this.setStyleActive()} href="#/active">Active</a>
               </li>
               <li>
-                <a id="completed" className={this.setStyleCompleted()} href="#/completed" onClick={this.props.completedViewMode}>
-                  Completed
-                </a>
+                <a id="completed" className={this.setStyleCompleted()} href="#/completed">Completed</a>
               </li>
             </ul>
           </li>
           <li>
-            <button onClick={this.props.deleteCompleted} style={this.hidden()}>
+            <button onClick={this.props.clearCompleted} style={this.clearCompletedHidden()}>
               Clear completed
             </button>
           </li>
@@ -41,28 +35,27 @@ class TodoAction extends Component {
 
   setStyleAll = () => {
     if (this.props.viewMode === "all") {
-      return "selected-link"
+      return "selected-link";
     }
-  }
-
+  };
 
   setStyleActive = () => {
     if (this.props.viewMode === "active") {
-      return "selected-link"
+      return "selected-link";
     }
-  }
+  };
 
   setStyleCompleted = () => {
     if (this.props.viewMode === "completed") {
-      return "selected-link"
+      return "selected-link";
     }
-  }
+  };
 
   hideSection = () => {
     return this.props.todos.length === 0 ? true : false;
   };
 
-  hidden = () => {
+  clearCompletedHidden = () => {
     let anyCompleted = false;
     this.props.todos.forEach(todo => {
       if (todo.isDone) {

@@ -21,7 +21,7 @@ class TodoMVC extends Component {
 
   render() {
     return (
-      <div>
+      <section>
         <TodoEntry
           todos={this.state.todos}
           toggleSelectAll={this.toggleSelectAll}
@@ -37,26 +37,12 @@ class TodoMVC extends Component {
         />
         <TodoAction
           todos={this.state.todos}
-          deleteCompleted={this.deleteCompleted}
-          showAll={this.showAll}
-          activeViewMode={this.activeViewMode}
-          completedViewMode={this.completedViewMode}
-          allViewMode={this.allViewMode}
+          clearCompleted={this.clearCompleted}
           viewMode={this.state.viewMode}
         />
-      </div>
+      </section>
     );
   }
-
-  allViewMode = () => {
-    this.setState({ viewMode: "all" }, () => this.saveLocal());
-  };
-  activeViewMode = () => {
-    this.setState({ viewMode: "active" }, () => this.saveLocal());
-  };
-  completedViewMode = () => {
-    this.setState({ viewMode: "completed" }, () => this.saveLocal());
-  };
 
   saveLocal = () => {
     localStorage.setItem("todos", JSON.stringify(this.state));
@@ -65,7 +51,7 @@ class TodoMVC extends Component {
   addTodo = e => {
     e.preventDefault();
     let newTitle = e.target.todoTitle.value.trim();
-    e.target.todoTitle.value = "";
+    e.target.todoTitle.value = ""; //resets the input
 
     if (newTitle !== "") {
       let newTodo = {
@@ -113,7 +99,7 @@ class TodoMVC extends Component {
     });
   };
 
-  deleteCompleted = () => {
+  clearCompleted = () => {
     this.setState(
       state => {
         state.todos = state.todos.filter(todo => todo.isDone !== true);
